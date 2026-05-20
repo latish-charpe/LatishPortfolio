@@ -171,7 +171,7 @@ export default function Hero() {
             </MagneticButton>
 
             <MagneticButton
-              href="https://github.com/latishcharpe"
+              href="https://github.com/repos"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost"

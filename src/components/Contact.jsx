@@ -6,9 +6,42 @@ import { SectionHead } from './About'
 import MagneticButton from './MagneticButton'
 
 const contactLinks = [
-  { id: 'email',  label: 'Email',    value: 'latishcharpe39@gmail.com',  href: 'mailto:latishcharpe39@gmail.com', icon: Mail,         color: '#ec4899' },
-  { id: 'github', label: 'GitHub',   value: 'github.com/latishcharpe',   href: 'https://github.com/latishcharpe',  icon: GithubIcon,  color: '#8b5cf6' },
-  { id: 'li',     label: 'LinkedIn', value: 'latish-charpe',             href: 'https://www.linkedin.com/in/latish-charpe-9536242a0', icon: LinkedinIcon, color: '#0a66c2' },
+  {
+    id: 'email',
+    label: 'Email',
+    value: 'latishcharpe39@gmail.com',
+    href: 'mailto:latishcharpe39@gmail.com',
+    icon: Mail,
+    color: '#ec4899',
+    gradient: 'linear-gradient(135deg, rgba(236,72,153,0.12), rgba(236,72,153,0.05))',
+    border: 'rgba(236,72,153,0.22)',
+    glow: 'rgba(236,72,153,0.14)',
+    isExternal: false,
+  },
+  {
+    id: 'github',
+    label: 'GitHub',
+    value: 'github.com/repos',
+    href: 'https://github.com/repos',
+    icon: GithubIcon,
+    color: '#8b5cf6',
+    gradient: 'linear-gradient(135deg, rgba(139,92,246,0.12), rgba(139,92,246,0.05))',
+    border: 'rgba(139,92,246,0.22)',
+    glow: 'rgba(139,92,246,0.14)',
+    isExternal: true,
+  },
+  {
+    id: 'li',
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/latish-charpe',
+    href: 'https://www.linkedin.com/in/latish-charpe-9536242a0',
+    icon: LinkedinIcon,
+    color: '#0a66c2',
+    gradient: 'linear-gradient(135deg, rgba(10,102,194,0.10), rgba(10,102,194,0.04))',
+    border: 'rgba(10,102,194,0.20)',
+    glow: 'rgba(10,102,194,0.12)',
+    isExternal: true,
+  },
 ]
 
 const inputStyle = {
@@ -88,37 +121,108 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}
           >
-            <p className="eyebrow" style={{ marginBottom: '0.5rem' }}>Reach Out</p>
+            <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>Reach Out</p>
 
-            {contactLinks.map(({ id, label, value, href, icon: Icon, color }) => (
-              <MagneticButton key={id}>
-                <motion.a
-                  href={href}
-                  target={id !== 'email' ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  className="card"
-                  style={{ padding: '1.1rem 1.4rem', display: 'flex', alignItems: 'center', gap: '1.1rem', textDecoration: 'none', cursor: 'pointer' }}
-                  whileHover={{
-                    borderColor: `${color}44`,
-                    boxShadow: `0 8px 24px ${color}18, 0 2px 8px rgba(15,23,42,0.04)`,
-                    y: -3,
-                  }}
-                  transition={{ duration: 0.22 }}
-                >
-                  <div style={{
-                    width: 42, height: 42, borderRadius: 12, flexShrink: 0,
-                    background: `${color}12`,
+            {contactLinks.map(({ id, label, value, href, icon: Icon, color, gradient, border, glow, isExternal }) => (
+              <motion.a
+                key={id}
+                href={href}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+                aria-label={`${label}: ${value}`}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1.1rem',
+                  padding: '1.1rem 1.4rem',
+                  borderRadius: 20,
+                  background: 'rgba(255,255,255,0.70)',
+                  backdropFilter: 'blur(16px)',
+                  WebkitBackdropFilter: 'blur(16px)',
+                  border: `1px solid ${border}`,
+                  boxShadow: '0 2px 10px rgba(15,23,42,0.05)',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)',
+                  outline: 'none',
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+                whileHover={{
+                  y: -4,
+                  background: 'rgba(255,255,255,0.95)',
+                  borderColor: color,
+                  boxShadow: `0 12px 32px ${glow}, 0 3px 8px rgba(15,23,42,0.06)`,
+                }}
+                whileFocus={{
+                  y: -2,
+                  boxShadow: `0 0 0 3px ${color}40, 0 6px 20px ${glow}`,
+                  borderColor: color,
+                }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+              >
+                {/* Subtle gradient background accent */}
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: gradient,
+                  opacity: 0,
+                  transition: 'opacity 0.25s ease',
+                  borderRadius: 'inherit',
+                  pointerEvents: 'none',
+                }} />
+
+                {/* Icon */}
+                <motion.div
+                  style={{
+                    width: 46, height: 46, borderRadius: 14, flexShrink: 0,
+                    background: `${color}10`,
                     border: `1px solid ${color}28`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <Icon size={18} style={{ color }} />
-                  </div>
-                  <div>
-                    <p style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-3)', marginBottom: 4, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'Poppins, sans-serif' }}>{label}</p>
-                    <p style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-1)', fontFamily: 'Inter, sans-serif' }}>{value}</p>
-                  </div>
-                </motion.a>
-              </MagneticButton>
+                    position: 'relative', zIndex: 1,
+                  }}
+                  whileHover={{ scale: 1.1, rotate: [0, -8, 8, -4, 0] }}
+                  transition={{ duration: 0.38 }}
+                >
+                  <Icon size={19} style={{ color }} />
+                </motion.div>
+
+                {/* Text */}
+                <div style={{ position: 'relative', zIndex: 1, minWidth: 0 }}>
+                  <p style={{
+                    fontSize: '0.7rem', fontWeight: 700,
+                    color: 'var(--text-3)',
+                    marginBottom: 5,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    fontFamily: 'Poppins, sans-serif',
+                  }}>{label}</p>
+                  <p style={{
+                    fontSize: '0.9rem', fontWeight: 600,
+                    color: 'var(--text-1)',
+                    fontFamily: 'Inter, sans-serif',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                  }}>{value}</p>
+                </div>
+
+                {/* Arrow */}
+                <motion.span
+                  style={{
+                    marginLeft: 'auto',
+                    fontSize: '0.8rem',
+                    color: 'var(--text-3)',
+                    flexShrink: 0,
+                    position: 'relative', zIndex: 1,
+                    opacity: 0.6,
+                  }}
+                  whileHover={{ x: 2, opacity: 1, color }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isExternal ? '↗' : '→'}
+                </motion.span>
+              </motion.a>
             ))}
 
             {/* Note */}

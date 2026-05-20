@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { GithubIcon, LinkedinIcon } from './icons'
 
 const socials = [
-  { label: 'GitHub',   href: 'https://github.com/latishcharpe',                        icon: GithubIcon,  color: '#0f172a' },
+  { label: 'GitHub',   href: 'https://github.com/repos',                               icon: GithubIcon,  color: '#0f172a' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/latish-charpe-9536242a0',     icon: LinkedinIcon, color: '#0a66c2' },
   { label: 'Email',    href: 'mailto:latishcharpe39@gmail.com',                          icon: Mail,         color: '#ec4899' },
 ]
