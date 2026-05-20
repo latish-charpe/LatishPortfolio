@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   ───────────────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:            #ffffff;
+  --bg-raised:     #fffafd;
+  --bg-card:       rgba(255, 255, 255, 0.72);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --bg-subtle:     rgba(245, 240, 255, 0.6);
+
+  /* Borders */
+  --border:        rgba(15, 23, 42, 0.07);
+  --border-hover:  rgba(15, 23, 42, 0.14);
+  --border-accent: rgba(139, 92, 246, 0.28);
+  --border-glass:  rgba(255, 255, 255, 0.18);
+
+  /* Text */
+  --text-1: #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+
+  /* Pink-Purple Accent System */
+  --pink:         #ec4899;
+  --pink-soft:    rgba(236, 72, 153, 0.10);
+  --purple:       #8b5cf6;
+  --purple-hover: #7c3aed;
+  --purple-soft:  rgba(139, 92, 246, 0.10);
+
+  /* Red — kept for compatibility */
+  --red:       #ef4444;
+  --red-hover: #dc2626;
+  --red-soft:  rgba(239, 68, 68, 0.10);
+  --red-glow:  rgba(239, 68, 68, 0.18);
+
+  /* Gradients */
+  --grad-primary: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  --grad-subtle:  linear-gradient(135deg, rgba(236, 72, 153, 0.06) 0%, rgba(139, 92, 246, 0.06) 100%);
+  --grad-card:    linear-gradient(145deg, rgba(255,255,255,0.9) 0%, rgba(250,245,255,0.7) 100%);
+
+  /* Aliases */
+  --accent:      var(--purple);
+  --accent-soft: var(--purple-soft);
+  --green:       #10b981;
+  --green-soft:  rgba(16, 185, 129, 0.10);
+
+  /* Premium Shadows */
+  --shadow-xs: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 2px 12px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 8px 28px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.03);
+  --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.10), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-glow: 0 8px 32px rgba(139, 92, 246, 0.18);
+
+  /* Radius */
+  --r-xs: 10px;
+  --r-sm: 14px;
+  --r:    20px;
+  --r-lg: 28px;
+  --r-xl: 36px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BASE RESET
+   ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BODY — Premium SaaS Background
+   ───────────────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at 82% 8%,  rgba(217, 70, 239, 0.12) 0%, transparent 30%),
+    radial-gradient(circle at 8%  88%, rgba(168, 85, 247, 0.09) 0%, transparent 28%),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.04) 0%, transparent 60%),
+    linear-gradient(150deg, #ffffff 0%, #fffafd 30%, #fdf4ff 65%, #faf5ff 100%);
+  background-attachment: fixed;
+  color: var(--text-1);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+}
+
+/* ─────────────────────────────────────────────────────────
+   SCROLLBAR
+   ───────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(236,72,153,0.4), rgba(139,92,246,0.4));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(236,72,153,0.6), rgba(139,92,246,0.6));
+}
+
+/* ─────────────────────────────────────────────────────────
+   LAYOUT
+   ───────────────────────────────────────────────────────── */
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  position: relative;
+  z-index: 1;
+}
+section {
+  padding-block: 5.5rem;
+}
+
+/* ─────────────────────────────────────────────────────────
+   CARD — Glassmorphism
+   ───────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card-hover);
+}
+.card-lift:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+/* ─────────────────────────────────────────────────────────
+   GRADIENT TEXT
+   ───────────────────────────────────────────────────────── */
+.gradient-text {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─────────────────────────────────────────────────────────
+   TYPOGRAPHY
+   ───────────────────────────────────────────────────────── */
+.eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--text-1);
+  letter-spacing: -0.03em;
+}
+.section-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--text-2);
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   BUTTONS
+   ───────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  border: none;
+  letter-spacing: -0.01em;
+}
+.btn-primary {
+  background: var(--grad-primary);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.30);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 28px rgba(139, 92, 246, 0.42);
+  filter: brightness(1.06);
+}
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─────────────────────────────────────────────────────────
+   TAG / CHIP
+   ───────────────────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.28rem 0.78rem;
+  border-radius: 999px;
+  font-size: 0.73rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  letter-spacing: 0.01em;
+}
+.tag:hover {
+  background: #fff;
+  border-color: rgba(139, 92, 246, 0.28);
+  color: var(--purple);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(139, 92, 246, 0.08);
+}
+
+/* ─────────────────────────────────────────────────────────
+   SECTION ALT
+   ───────────────────────────────────────────────────────── */
+.section-alt {
+  background: rgba(250, 245, 255, 0.35);
+  position: relative;
+}
+.section-alt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(139, 92, 246, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────
+   FOCUS
+   ───────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ─────────────────────────────────────────────────────────
+   ANIMATIONS
+   ───────────────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+
+.pulse-dot { animation: pulse-dot 2.2s ease-in-out infinite; }
+.float-anim { animation: float 5s ease-in-out infinite; }
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE HELPERS
+   ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  section { padding-block: 4rem; }
+  .section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+  .wrap { padding-inline: 1.25rem; }
+}
+@media (max-width: 480px) {
+  section { padding-block: 3rem; }
+  .wrap { padding-inline: 1rem; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   MISC
+   ───────────────────────────────────────────────────────── */
+hr { border: none; border-top: 1px solid var(--border); }
+img { display: block; max-width: 100%; }
