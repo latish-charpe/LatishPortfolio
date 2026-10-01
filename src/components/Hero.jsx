@@ -161,7 +161,7 @@ export default function Hero() {
             style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}
           >
             <MagneticButton
-              href="/Latish_Resume.pdf"
+              href="/Latich_Charpe_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
